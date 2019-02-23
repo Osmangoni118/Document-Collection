@@ -6,8 +6,11 @@
 package com.document.collection.service;
 
 import com.document.collection.dto.AddressDTO;
+import com.document.collection.dto.UserBasicDTO;
 import com.document.collection.entity.AddressInfo;
 import com.document.collection.repository.AddressInfoRepo;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +36,17 @@ public class AddressInfoService {
             return true;
         }
         return false;
+    }
+
+    public List<AddressDTO> findAddressListByUserBasic(UserBasicDTO basicDTO) throws Exception {
+        List<AddressDTO> addressDTOs = new ArrayList<>();
+        List<AddressInfo> addressInfos = addressInfoRepo.findByUserBasicInfo(basicInfoService.copyUserBasicInfoFromDTO(basicDTO));
+        addressInfos.stream().forEach((a) -> {
+            AddressDTO addressDTO = copyAddressDtoFromEntity(a);
+//            addressDTO.setUserBasicDTO(basicInfoService.copyUserBasicDTOfromEntity(a.getUserBasicInfo()));
+            addressDTOs.add(addressDTO);
+        });
+        return addressDTOs;
     }
 
     public AddressInfo copyAddressInfoFromDTO(AddressDTO addressDTO) {

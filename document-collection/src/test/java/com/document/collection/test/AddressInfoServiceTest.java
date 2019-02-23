@@ -8,8 +8,10 @@ package com.document.collection.test;
 import com.document.collection.dto.AddressDTO;
 import com.document.collection.dto.UserBasicDTO;
 import com.document.collection.service.AddressInfoService;
+import com.document.collection.service.UserBasicInfoService;
 import static org.junit.Assert.*;
 import java.util.Date;
+import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,8 @@ public class AddressInfoServiceTest {
     
     @Autowired
     private AddressInfoService addressInfoService;
-    
+    @Autowired
+    private UserBasicInfoService basicInfoService;
     
 //    @Test
 //    public void saveOrUpdateAddressInfoForPresentAddress() throws Exception{
@@ -41,18 +44,18 @@ public class AddressInfoServiceTest {
 //        boolean check = addressInfoService.isSaveOrUpdateAddressInfo(addressDTO);
 //        assertEquals(true, check);
 //    }
-    @Test
-    public void saveOrUpdateAddressInfoForPermanentAddress() throws Exception{
-        AddressDTO addressDTO = new AddressDTO();
-        addressDTO.setAddressType("Permanent Address");
-        addressDTO.setPostOffice("Badda");
-        addressDTO.setThana("Badda");
-        addressDTO.setDistrict("Dhaka");
-        addressDTO.setExecutedDate(new Date());
-        addressDTO.setUserBasicDTO(createUserBasicDTO());
-        boolean check = addressInfoService.isSaveOrUpdateAddressInfo(addressDTO);
-        assertEquals(true, check);
-    }
+//    @Test
+//    public void saveOrUpdateAddressInfoForPermanentAddress() throws Exception{
+//        AddressDTO addressDTO = new AddressDTO();
+//        addressDTO.setAddressType("Permanent Address");
+//        addressDTO.setPostOffice("Badda");
+//        addressDTO.setThana("Badda");
+//        addressDTO.setDistrict("Dhaka");
+//        addressDTO.setExecutedDate(new Date());
+//        addressDTO.setUserBasicDTO(createUserBasicDTO());
+//        boolean check = addressInfoService.isSaveOrUpdateAddressInfo(addressDTO);
+//        assertEquals(true, check);
+//    }
 //    @Test
 //    public void saveOrUpdateAddressInfoForOfficeAddress() throws Exception{
 //        AddressDTO addressDTO = new AddressDTO();
@@ -66,9 +69,16 @@ public class AddressInfoServiceTest {
 //        assertEquals(true, check);
 //    }
     
+    @Test
+    public void findAddressListByUser() throws Exception{
+        UserBasicDTO basicDTO = basicInfoService.findUserBasicDTO(1l);
+        List<AddressDTO> addressDTOs = addressInfoService.findAddressListByUserBasic(basicDTO);
+        assertNotEquals(0, addressDTOs);
+    }
+    
     public UserBasicDTO createUserBasicDTO(){
         UserBasicDTO basicDTO = new UserBasicDTO();
-        basicDTO.setUserBasicID(2l);
+        basicDTO.setUserBasicID(1l);
         return basicDTO;
     }
 }

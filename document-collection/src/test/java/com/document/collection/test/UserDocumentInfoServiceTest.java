@@ -7,7 +7,10 @@ package com.document.collection.test;
 
 import com.document.collection.dto.UserBasicDTO;
 import com.document.collection.dto.UserDocumentDTO;
+import com.document.collection.service.UserBasicInfoService;
 import com.document.collection.service.UserDocumentInfoService;
+import java.util.Date;
+import java.util.List;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,21 +28,22 @@ public class UserDocumentInfoServiceTest {
     
     @Autowired
     private UserDocumentInfoService documentInfoService;
-    
-    @Test
-    public void saveOrUpdateUserDocumentInfoForNID() throws Exception{
-        UserDocumentDTO documentDTO = new UserDocumentDTO();
-        documentDTO.setDocumentType("NID");
-        documentDTO.setNidNumber(51173215478965441l);
-        documentDTO.setNationality("Bangladeshi");
-        documentDTO.setGender("Male");
-        documentDTO.setReligion("Islam");
-        documentDTO.setFileName("osmangoni.png");
-        documentDTO.setFilePath("C://images/");
-        documentDTO.setUserBasicDTO(createUserBasicDTO());
-        boolean check = documentInfoService.isSaveOrUpdateUserDocumentInfo(documentDTO);
-        assertEquals(true, check);
-    }
+    @Autowired
+    private UserBasicInfoService basicInfoService;
+//    @Test
+//    public void saveOrUpdateUserDocumentInfoForNID() throws Exception{
+//        UserDocumentDTO documentDTO = new UserDocumentDTO();
+//        documentDTO.setDocumentType("NID");
+//        documentDTO.setNidNumber(511732478965441l);
+//        documentDTO.setNationality("Bangladeshi");
+//        documentDTO.setGender("Male");
+//        documentDTO.setReligion("Islam");
+//        documentDTO.setFileName("osmangoni.png");
+//        documentDTO.setFilePath("C://images/");
+//        documentDTO.setUserBasicDTO(createUserBasicDTO());
+//        boolean check = documentInfoService.isSaveOrUpdateUserDocumentInfo(documentDTO);
+//        assertEquals(true, check);
+//    }
     
 //    @Test
 //    public void saveOrUpdateUserDocumentInfoForBirthCertificate() throws Exception{
@@ -73,9 +77,22 @@ public class UserDocumentInfoServiceTest {
 //        assertEquals(true, check);
 //    }
     
+    @Test
+    public void findUserDocumentByUserBasic() throws Exception{
+        UserBasicDTO basicDTO = basicInfoService.findUserBasicDTO(1l);
+        List<UserDocumentDTO> documentDTOs = documentInfoService.findUserDocumentListByUserBasic(basicDTO);
+        assertNotEquals(0, documentDTOs);
+    }
+    
+    @Test
+    public void findUserDocumentByDocumentType() throws Exception{
+        List<UserDocumentDTO> documentDTOs = documentInfoService.findUserDocumentListByDocumentType("NID");
+        assertNotEquals(0, documentDTOs);
+    }
+    
      public UserBasicDTO createUserBasicDTO(){
         UserBasicDTO basicDTO = new UserBasicDTO();
-        basicDTO.setUserBasicID(2l);
+        basicDTO.setUserBasicID(1l);       
         return basicDTO;
     }
 }

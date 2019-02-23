@@ -6,6 +6,8 @@
 package com.document.collection.repository;
 
 import com.document.collection.entity.AddressInfo;
+import com.document.collection.entity.UserBasicInfo;
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -14,4 +16,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface AddressInfoRepo extends CrudRepository<AddressInfo, Long>{
     
+    public List<AddressInfo> findByUserBasicInfo(UserBasicInfo userBasicInfo) throws Exception;
 }

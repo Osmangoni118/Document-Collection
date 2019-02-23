@@ -5,9 +5,12 @@
  */
 package com.document.collection.service;
 
+import com.document.collection.dto.UserBasicDTO;
 import com.document.collection.dto.UserDocumentDTO;
 import com.document.collection.entity.UserDocumentInfo;
 import com.document.collection.repository.UserDocumentInfoRepo;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +36,28 @@ public class UserDocumentInfoService {
             return true;
         }
         return false;
+    }
+
+    public List<UserDocumentDTO> findUserDocumentListByUserBasic(UserBasicDTO basicDTO) throws Exception {
+        List<UserDocumentDTO> documentDTOs = new ArrayList<>();
+        List<UserDocumentInfo> documentInfos = documentInfoRepo.findByUserBasicInfo(basicInfoService.copyUserBasicInfoFromDTO(basicDTO));
+        documentInfos.stream().forEach((d) -> {
+            UserDocumentDTO documentDTO = copyUserDocumentDtoFromEntity(d);
+//            documentDTO.setUserBasicDTO(basicInfoService.copyUserBasicDTOfromEntity(d.getUserBasicInfo()));
+            documentDTOs.add(documentDTO);
+        });
+        return documentDTOs;
+    }
+    
+    public List<UserDocumentDTO> findUserDocumentListByDocumentType(String documentType) throws Exception {
+        List<UserDocumentDTO> documentDTOs = new ArrayList<>();
+        List<UserDocumentInfo> documentInfos = documentInfoRepo.findByDocumentType(documentType);
+        documentInfos.stream().forEach((d) -> {
+            UserDocumentDTO documentDTO = copyUserDocumentDtoFromEntity(d);
+//            documentDTO.setUserBasicDTO(basicInfoService.copyUserBasicDTOfromEntity(d.getUserBasicInfo()));
+            documentDTOs.add(documentDTO);
+        });
+        return documentDTOs;
     }
 
     public UserDocumentInfo copyUserDocumentInfoFromDTO(UserDocumentDTO documentDTO) {
