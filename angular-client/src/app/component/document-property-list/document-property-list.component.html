@@ -1,0 +1,21 @@
+<h2 class="h-header">Document Property List</h2>
+<div>
+  <button (click)="previousPage()" class="btn-pre">Previous</button>
+</div>
+<div class="add-user">
+  <!-- <button (click)="addDocumentProperty()" class="btn-pre">Add Document Property</button> -->
+</div>
+<table id="users">
+  <tr>
+    <th>Property Type</th>
+    <th>Property Name</th>
+    <th>Property Label</th>
+    <th>Document Type</th>
+  </tr>
+  <tr *ngFor="let t of propertyList">
+    <td>{{t.propertyType}}</td>
+    <td>{{t.propertyName}}</td>
+    <td>{{t.propertyLabel}}</td>
+    <td>{{t.documentTypeDTO.typeName}}</td>
+  </tr>
+</table>

@@ -1,0 +1,58 @@
+<div class="h2">
+  <h2></h2>
+</div>
+
+<p class="check-box">
+    <input type="radio" name="addressType" value="Present Address" [ngModel]="userData.addressType" data-md-icheck (change)="toggleVisibility($event, 'Present Address')">  Present Address
+    <input type="radio" name="addressType" value="Permanent Address" [ngModel]="userData.addressType"  data-md-icheck (change)="toggleVisibility($event, 'Permanent Address')"> Permanent Address
+    <input type="radio" name="addressType" value="Office Address" [ngModel]="userData.addressType"  data-md-icheck (change)="toggleVisibility($event, 'Office Address')"> Office Address
+ </p>
+<div class="h2" *ngIf="userData.addressType == 'Present Address'">
+<h2>This form is giving user present address information.</h2>
+</div>
+<div class="h2" *ngIf="userData.addressType == 'Permanent Address'">
+<h2>This form is giving permanent address information.</h2>
+</div>
+<div class="h2" *ngIf="userData.addressType == 'Office Address'">
+<h2>This form is giving office address information.</h2>
+</div>
+<div class="container" *ngIf="userData.addressType == 'Present Address'">
+  <label for="fname">District</label>
+  <input type="text" [(ngModel)]="userData.district" placeholder="District">
+  <label for="fname">Post Office</label>
+  <input type="text" [(ngModel)]="userData.postOffice" placeholder="Post Office">
+  <label for="fname">Thana</label>
+  <input type="text" [(ngModel)]="userData.thana" placeholder="Thana">
+  
+  <button (click)="addUserAddress()" class="btn">Save</button> <br/>
+  <button (click)="previousPage()" class="btn-pre">Previous</button>
+</div>
+
+<div class="container" *ngIf="userData.addressType == 'Permanent Address'">
+  <label for="fname">Village</label>
+  <input type="text" [(ngModel)]="userData.village" placeholder="Village">
+  <label for="fname">District</label>
+  <input type="text" [(ngModel)]="userData.district" placeholder="District">
+  <label for="fname">Post Office</label>
+  <input type="text" [(ngModel)]="userData.postOffice" placeholder="Post Office">
+  <label for="fname">Thana</label>
+  <input type="text" [(ngModel)]="userData.thana" placeholder="Thana">
+    
+    <button (click)="addUserAddress()" class="btn">Save</button> <br/>
+    <button (click)="previousPage()" class="btn-pre">Previous</button>
+</div>
+
+
+<div class="container" *ngIf="userData.addressType == 'Office Address'">
+  <label for="fname">Zip Code</label>
+  <input type="text" [(ngModel)]="userData.zipCode" placeholder="Zip Code">
+  <label for="fname">District</label>
+  <input type="text" [(ngModel)]="userData.district" placeholder="District">
+  <label for="fname">Post Office</label>
+  <input type="text" [(ngModel)]="userData.postOffice" placeholder="Post Office">
+  <label for="fname">Thana</label>
+  <input type="text" [(ngModel)]="userData.thana" placeholder="Thana">
+    
+    <button (click)="addUserAddress()" class="btn">Save</button> <br/>
+    <button (click)="previousPage()" class="btn-pre">Previous</button>
+</div>

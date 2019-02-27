@@ -1,0 +1,14 @@
+<div class="container-h2">
+  <h2 class="h2-cl">Add Document Property</h2>
+</div>
+<div class="container">
+  <label for="fname">Property Type</label>
+  <input [(ngModel)]="userData.propertyType" type="text" placeholder="Property Type">
+  <label for="fname">Property Name</label>
+  <input [(ngModel)]="userData.propertyName" type="text" placeholder="Property Name">
+  <label for="fname">Property Label</label>
+  <input [(ngModel)]="userData.propertyLabel" type="text" placeholder="Property Label">
+
+  <button (click)="addDocumentProperty()" class="btn">Save</button> <br />
+  <button (click)="previousPage()" class="btn-pre">Previous</button>
+</div>

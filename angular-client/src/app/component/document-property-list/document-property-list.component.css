@@ -1,0 +1,54 @@
+.add-user{
+    float: right;
+  }
+    #users {
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    #users td, #users th {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    
+    #users tr:nth-child(even){background-color: #f2f2f2;}
+    
+    #users tr:hover {background-color: #ddd;}
+    
+    #users th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      background-color: #4CAF50;
+      color: white;
+    }
+  
+    .th-width{    
+      width: 50%;
+    }
+  
+    .btn {
+      background-color: dodgerblue;
+      color: white;
+      padding: 15px 20px;
+      border: none;
+      cursor: pointer;
+      opacity: 0.9;
+      width: 250px;
+    }
+    .td-btn {
+      background-color: dodgerblue;
+      color: white;
+      padding: 15px 20px;
+      border: none;
+      cursor: pointer;
+      opacity: 0.9;
+      width: 30%;
+      margin: 5px;
+    }
+  
+    .h-header{
+      text-align: center;
+      font-size: 30px;
+    }

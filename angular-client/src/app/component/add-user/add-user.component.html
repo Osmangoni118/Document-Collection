@@ -1,0 +1,23 @@
+
+<div class="div-padding"> 
+  <h2>Add User Information</h2>
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input [(ngModel)]="userData.firstName" class="input-field" type="text" placeholder="First Name">
+  </div>
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input [(ngModel)]="userData.lastName" class="input-field" type="text" placeholder="Last Name">
+  </div>
+  <div class="input-container">
+    <i class="fa fa-phone icon"></i>
+    <input [(ngModel)]="userData.mobileNo" class="input-field" type="text" placeholder="Mobile No.">
+  </div>
+  <div class="input-container">
+    <i class="fa fa-envelope icon"></i>
+    <input [(ngModel)]="userData.email" class="input-field" type="text" placeholder="Email">
+  </div>
+
+  <button (click)="addUserBasic()" class="btn">Save</button> <br/>
+  <button (click)="previousPage()" class="btn-pre">Previous</button>
+</div>

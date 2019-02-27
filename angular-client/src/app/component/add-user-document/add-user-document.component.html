@@ -1,0 +1,88 @@
+<div class="h2">
+  <h2>Which type of document do you want to provide? Just select the checkbox and provide speciic information.</h2>
+</div>
+
+<ul class="products">
+  <li *ngFor="let t of typeList; let i=index;">
+    <input type="radio" name="id" value="{{t.id}}" data-md-icheck (change)="toggleVisibility($event, t.id)">
+    {{t.typeName}}
+  </li>
+</ul>
+
+<div *ngIf="propertyList.length > 0;" class="container">
+  <ul class="products">
+    <li *ngFor="let p of propertyList;">
+      <label for="fname">{{p.propertyLabel}}</label>
+      <input type="text" [(ngModel)]="userData.documentValue" placeholder="{{p.propertyLabel}}">
+    </li>
+    <button *ngIf="propertyList.length > 0;" class="btn">Save</button> <br />
+  </ul>
+</div>
+<div *ngIf="propertyList.length <= 0;" class="container">
+  <ul class="products">
+    Property not found
+  </ul>
+</div>
+
+<!-- <p class="check-box">
+  <input type="radio" name="documentType" value="NID" [ngModel]="userData.documentType" data-md-icheck
+    (change)="toggleVisibility($event, 'NID')"> National ID Card
+  <input type="radio" name="documentType" value="Birth Certificate" [ngModel]="userData.documentType" data-md-icheck
+    (change)="toggleVisibility($event, 'Birth Certificate')"> Birth Certificate
+  <input type="radio" name="documentType" value="Others" [ngModel]="userData.documentType" data-md-icheck
+    (change)="toggleVisibility($event, 'Others')"> Others
+</p> -->
+<!-- 
+<div class="h2" *ngIf="userData.documentType == 'NID'">
+  <h2>This form is giving National id cards information.</h2>
+</div>
+<div class="h2" *ngIf="userData.documentType == 'Birth Certificate'">
+  <h2>This form is giving Birth Certificate information.</h2>
+</div>
+<div class="h2" *ngIf="userData.documentType == 'Others'">
+  <h2>This form is giving Others information.</h2>
+</div>
+<div class="container" *ngIf="userData.documentType == 'NID'">
+  <label for="fname">NID Number</label>
+  <input type="text" [(ngModel)]="userData.nidNumber" placeholder="NID Number">
+  <label for="fname">Relegion</label>
+  <input type="text" [(ngModel)]="userData.religion" placeholder="Relegion">
+  <label for="fname">Gender</label>
+  <input type="text" [(ngModel)]="userData.gender" placeholder="Gender">
+  <label for="fname">Nationality</label>
+  <input type="text" [(ngModel)]="userData.nationality" placeholder="Nationality">
+
+  <button (click)="addUserDocument()" class="btn">Save</button> <br />
+  <button (click)="previousPage()" class="btn-pre">Previous</button>
+</div>
+
+<div class="container" *ngIf="userData.documentType == 'Birth Certificate'">
+  <label for="fname">Birth Certificate No</label>
+  <input type="text" [(ngModel)]="userData.birthCertificateNo" placeholder="Birth Certificate No">
+  <label for="fname">Citizenship Status</label>
+  <input type="text" [(ngModel)]="userData.citizenshipStatus" placeholder="Citizenship Status">
+  <label for="fname">Gender</label>
+  <input type="text" [(ngModel)]="userData.gender" placeholder="Gender">
+  <label for="fname">Nationality</label>
+  <input type="text" [(ngModel)]="userData.nationality" placeholder="Nationality">
+
+  <button (click)="addUserDocument()" class="btn">Save</button> <br />
+  <button (click)="previousPage()" class="btn-pre">Previous</button>
+</div>
+
+
+<div class="container" *ngIf="userData.documentType == 'Others'">
+  <label for="fname">Others Document No</label>
+  <input type="text" [(ngModel)]="userData.othersDocumentNo" placeholder="Others Document No">
+  <label for="fname">Document Name</label>
+  <input type="text" [(ngModel)]="userData.documentName" placeholder="Document Name">
+  <label for="fname">Citizenship Status</label>
+  <input type="text" [(ngModel)]="userData.citizenshipStatus" placeholder="Citizenship Status">
+  <label for="fname">Dual Citizenship</label>
+  <input type="text" [(ngModel)]="userData.dualCitizenship" placeholder="Dual Citizenship">
+  <label for="fname">Nationality</label>
+  <input type="text" [(ngModel)]="userData.nationality" placeholder="Nationality">
+
+  <button (click)="addUserDocument()" class="btn">Save</button> <br />
+  <button (click)="previousPage()" class="btn-pre">Previous</button>
+</div> -->

@@ -1,0 +1,19 @@
+<div class="container-h2">
+  <h2 class="h2-cl">Add Document Type</h2>
+</div>
+<div class="container">
+  <label for="fname">Type Name</label>
+  <input [(ngModel)]="userData.typeName" type="text" placeholder="Type Name">
+  <label for="fname">Description</label>
+  <input [(ngModel)]="userData.description" type="text" placeholder="Description">
+  <label for="fname">Storage Address</label>
+  <input [(ngModel)]="userData.storageAddress" type="text" placeholder="Storage Address">
+  <label for="fname">Multiple Document</label>
+  <input type="radio" name="multipleDocument" value="True" [ngModel]="userData.multipleDocument" data-md-icheck
+    (change)="toggleVisibility($event, 'True')"> Yes
+  <input type="radio" name="multipleDocument" value="False" [ngModel]="userData.multipleDocument" data-md-icheck
+    (change)="toggleVisibility($event, 'False')"> No
+
+  <button (click)="addDocumentType()" class="btn">Save</button> <br />
+  <button (click)="previousPage()" class="btn-pre">Previous</button>
+</div>

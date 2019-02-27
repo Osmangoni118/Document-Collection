@@ -1,0 +1,28 @@
+<h2 class="h-header">User Information List</h2>
+
+<div class="add-user">
+  <button (click)="addUserBasic()" class="btn">
+    Add User
+  </button>
+</div>
+
+<table id="users">
+  <tr>
+    <th>Name</th>
+    <th>Mobile No.</th>
+    <th>Email</th>
+    <th class="th-width">Action</th>
+  </tr>
+  <tr *ngFor="let u of users">
+    <td>{{u.firstName + " " +u.lastName}}</td>
+    <td>{{u.mobileNo}}</td>
+    <td>{{u.email}}</td>
+    <td>
+      <button (click)="addDocumentType(u)" class="td-btn">Add Document Type</button>
+      <button (click)="showDocumentTypeList(u)" class="td-btn">Type List</button>
+      <button (click)="addUserDocument(u)" class="td-btn">Add Document</button>
+      <button (click)="addUserAddress(u)" class="td-btn">Add Address</button>
+      <!-- <button (click)="showUserFullInformation(u)" class="td-btn">Full Information</button> -->
+    </td>
+  </tr>
+</table>
