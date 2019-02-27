@@ -37,6 +37,12 @@ public class UserBasicInfo implements Serializable {
     @Column(name = "email")
     private String email;
     
+    @Column(name = "gender")
+    private String gender;
+    
+    @Column(name = "religion")
+    private String religion;
+    
     @Column(name = "registration_date")    
     @Temporal(TemporalType.DATE)
     private Date registrationDate;
@@ -87,6 +93,22 @@ public class UserBasicInfo implements Serializable {
 
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getReligion() {
+        return religion;
+    }
+
+    public void setReligion(String religion) {
+        this.religion = religion;
     }
 
 

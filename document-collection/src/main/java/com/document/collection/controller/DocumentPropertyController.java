@@ -5,9 +5,9 @@
  */
 package com.document.collection.controller;
 
-import com.document.collection.dto.UserBasicDTO;
+import com.document.collection.dto.DocumentPropertyDTO;
 import com.document.collection.dto.UserDocumentDTO;
-import com.document.collection.service.UserDocumentInfoService;
+import com.document.collection.service.DocumentPropertyService;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,16 +26,17 @@ import org.springframework.web.bind.annotation.RestController;
  * @author osman
  */
 @RestController
-public class UserDocumentInfoController {
+@RequestMapping(value = "api/document/")
+public class DocumentPropertyController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserDocumentInfoController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DocumentPropertyController.class);
     @Autowired
-    private UserDocumentInfoService documentInfoService;
+    private DocumentPropertyService documentPropertyService;
 
-    @RequestMapping(value = "/document/add-or-edit", method = RequestMethod.POST)
-    public ResponseEntity<UserDocumentDTO> saveOrUpdateUserDocument(@RequestBody UserDocumentDTO documentDTO) {
+    @RequestMapping(value = "/properties", method = RequestMethod.POST)
+    public ResponseEntity<DocumentPropertyDTO> saveDocumentProperties(@RequestBody DocumentPropertyDTO propertyDTO) {
         try {
-            boolean status = documentInfoService.isSaveOrUpdateUserDocumentInfo(documentDTO);
+            boolean status = documentPropertyService.isSaveDocumentProperty(propertyDTO);
             if (status) {
                 return new ResponseEntity(HttpStatus.CREATED);
             } else {
@@ -53,13 +53,9 @@ public class UserDocumentInfoController {
         }
     }
 
-    @RequestMapping(value = "/document/list-by-user", method = RequestMethod.POST)
-    public List<UserDocumentDTO> finddocumentInfoServiceListByUserBasic(@RequestBody UserBasicDTO basicDTO) throws Exception {
-        return documentInfoService.findUserDocumentListByUserBasic(basicDTO);
+    @RequestMapping(value = "/properties", method = RequestMethod.GET)
+    public List<DocumentPropertyDTO> finddocumentPropertiesById(@RequestParam Long id) throws Exception {
+        return documentPropertyService.findDocumentPropertiesByTypeId(id);
     }
 
-    @RequestMapping(value = "/document/list-by-document-type", method = RequestMethod.GET)
-    public List<UserDocumentDTO> finddocumentInfoServiceListByDocumentType(@RequestParam String documentType) throws Exception {
-        return documentInfoService.findUserDocumentListByDocumentType(documentType);
-    }
 }

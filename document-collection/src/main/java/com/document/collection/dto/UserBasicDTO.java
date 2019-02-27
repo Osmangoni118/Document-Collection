@@ -17,6 +17,8 @@ public class UserBasicDTO {
     private String lastName;
     private String mobileNo;
     private String email;
+    private String gender;
+    private String religion;
     private Date registrationDate;
 
     public Long getUserBasicID() {
@@ -57,6 +59,22 @@ public class UserBasicDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getReligion() {
+        return religion;
+    }
+
+    public void setReligion(String religion) {
+        this.religion = religion;
     }
 
     public Date getRegistrationDate() {
