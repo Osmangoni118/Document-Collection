@@ -13,7 +13,7 @@ export class AddDocumenttypeComponent implements OnInit {
 
 
   @Input() userData = {
-    typeName: '', description: '', storageAddress: '', multipleDocument: '', basicDTO: {}
+    typeName: '', description: '', documentNo: 0, documentName: 0, verified: 0, documentValidity: 0, others: 0, basicDTO: {}
   };
 
   constructor(private rest: DocumenttypeService, private route: ActivatedRoute, private router: Router) {
@@ -31,8 +31,12 @@ export class AddDocumenttypeComponent implements OnInit {
     console.log("document object : ", this.userData);
     this.rest.addDocumentType(this.userData).subscribe((result) => {
       console.log('result ', result);
-      alert('Data successfull added.');
-      this.router.navigate(['/users']);
+      if (result != null) {
+        alert('Data added successfully.');
+        this.router.navigate(['/users']);
+      } else {
+        alert('Something wrong.');
+      }
     }, (err) => {
       console.log(err);
     });
@@ -42,9 +46,44 @@ export class AddDocumenttypeComponent implements OnInit {
     this.router.navigate(['/users']);
   }
 
-  toggleVisibility(event, value) {
+  changeDocumentNo(event) {
     if (event.target.checked) {
-      this.userData.multipleDocument = value;
+      this.userData.documentNo = 1;
+    }
+    if (!event.target.checked) {
+      this.userData.documentNo = 0;
+    }
+  }
+  changeDocumentName(event) {
+    if (event.target.checked) {
+      this.userData.documentName = 1;
+    }
+    if (!event.target.checked) {
+      this.userData.documentName = 0;
+    }
+  }
+  changeVerified(event) {
+    if (event.target.checked) {
+      this.userData.verified = 1;
+    }
+    if (!event.target.checked) {
+      this.userData.verified = 0;
+    }
+  }
+  changeDocumentValidity(event) {
+    if (event.target.checked) {
+      this.userData.documentValidity = 1;
+    }
+    if (!event.target.checked) {
+      this.userData.documentValidity = 0;
+    }
+  }
+  changeOthers(event) {
+    if (event.target.checked) {
+      this.userData.others = 1;
+    }
+    if (!event.target.checked) {
+      this.userData.others = 0;
     }
   }
 

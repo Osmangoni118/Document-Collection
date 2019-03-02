@@ -6,6 +6,7 @@
 package com.document.collection.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,38 +14,47 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author osman
  */
 @Entity
-@Table(name = "document_type")
-public class DocumentType implements Serializable {
+@Table(name = "document", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"user_basic_id", "type_id"})
+})
+public class Document implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "type_name")
-    private String typeName;
-    @Column(name = "description")
-    private String description;
     @Column(name = "document_no")
-    private int documentNo;
+    private Long documentNo;
     @Column(name = "document_name")
-    private int documentName;
+    private String documentName;
     @Column(name = "verified")
-    private int verified;
+    private boolean verified;
+    @Temporal(TemporalType.DATE)
     @Column(name = "document_validity")
-    private int documentValidity;
+    private Date documentValidity;
     @Column(name = "others")
-    private int others;
+    private String others;
+    
     @ManyToOne
     @JoinColumn(name = "user_basic_id")
     private UserBasicInfo basicInfo;
+    
+    @OneToOne
+    @JoinColumn(name = "type_id")  
+    private DocumentType documentType;
+    
 
     public Long getId() {
         return id;
@@ -54,20 +64,44 @@ public class DocumentType implements Serializable {
         this.id = id;
     }
 
-    public String getTypeName() {
-        return typeName;
+    public Long getDocumentNo() {
+        return documentNo;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public void setDocumentNo(Long documentNo) {
+        this.documentNo = documentNo;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDocumentName() {
+        return documentName;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDocumentName(String documentName) {
+        this.documentName = documentName;
+    }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+
+    public Date getDocumentValidity() {
+        return documentValidity;
+    }
+
+    public void setDocumentValidity(Date documentValidity) {
+        this.documentValidity = documentValidity;
+    }
+
+    public String getOthers() {
+        return others;
+    }
+
+    public void setOthers(String others) {
+        this.others = others;
     }
 
     public UserBasicInfo getBasicInfo() {
@@ -78,44 +112,12 @@ public class DocumentType implements Serializable {
         this.basicInfo = basicInfo;
     }
 
-    public int getDocumentNo() {
-        return documentNo;
+    public DocumentType getDocumentType() {
+        return documentType;
     }
 
-    public void setDocumentNo(int documentNo) {
-        this.documentNo = documentNo;
-    }
-
-    public int getDocumentName() {
-        return documentName;
-    }
-
-    public void setDocumentName(int documentName) {
-        this.documentName = documentName;
-    }
-
-    public int getVerified() {
-        return verified;
-    }
-
-    public void setVerified(int verified) {
-        this.verified = verified;
-    }
-
-    public int getDocumentValidity() {
-        return documentValidity;
-    }
-
-    public void setDocumentValidity(int documentValidity) {
-        this.documentValidity = documentValidity;
-    }
-
-    public int getOthers() {
-        return others;
-    }
-
-    public void setOthers(int others) {
-        this.others = others;
+    public void setDocumentType(DocumentType documentType) {
+        this.documentType = documentType;
     }
 
     @Override
@@ -128,10 +130,10 @@ public class DocumentType implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof DocumentType)) {
+        if (!(object instanceof Document)) {
             return false;
         }
-        DocumentType other = (DocumentType) object;
+        Document other = (Document) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -140,7 +142,7 @@ public class DocumentType implements Serializable {
 
     @Override
     public String toString() {
-        return "com.document.collection.entity.DocumentType[ id=" + id + " ]";
+        return "com.document.collection.entity.Document[ id=" + id + " ]";
     }
-
+    
 }

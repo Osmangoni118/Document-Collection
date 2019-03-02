@@ -18,14 +18,19 @@ export class UserdocumentService {
 
   constructor(private rest: RestService, private http: HttpClient) { }
 
-  addOrEditUserDocument(userDocument): Observable<any> {
-    console.log(userDocument);
-    return this.http.post<any>(endpoint + 'document/' + 'add-or-edit', JSON.stringify(userDocument), httpOptions).pipe(
+  addUserDocument(userDocument): Observable<any> {
+    console.log('service ', userDocument);
+    return this.http.post<any>(endpoint + 'api/document/documents', JSON.stringify(userDocument), httpOptions).pipe(
       tap((userDocument) => console.log(`added userDocument`)),
       catchError(this.rest.handleError<any>('addOrEditUserDocument'))
     );
   }
 
+  getDocumentListByUserId(userbasic): Observable<any> {
+    return this.http.get<any>(endpoint + 'api/document/documents?userId=' + JSON.stringify(userbasic.userBasicID)).pipe(
+      map(this.rest.extractData));
+  }
+  
   getUserDocumentListByUserBasic(userbasic): Observable<any> {
     return this.http.post<any>(endpoint + 'document/' + 'list-by-user', JSON.stringify(userbasic), httpOptions).pipe(
       map(this.rest.extractData));

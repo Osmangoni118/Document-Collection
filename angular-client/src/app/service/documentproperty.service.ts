@@ -21,7 +21,7 @@ export class DocumentpropertyService {
   addDocumentProperty(documentProperty): Observable<any> {
     console.log(documentProperty);
     return this.http.post<any>(endpoint + 'api/document/properties', JSON.stringify(documentProperty), httpOptions).pipe(
-      tap((documentProperty) => console.log(`added document property`)),
+      tap((documentProperty) => alert(`added document property`)),
       catchError(this.rest.handleError<any>('addDocumentProperty'))
     );
   }

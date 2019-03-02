@@ -21,7 +21,7 @@ export class AddressService {
   addOrEditAddress(address): Observable<any> {
     console.log(address);
     return this.http.post<any>(endpoint + 'address/' + 'add-or-edit', JSON.stringify(address), httpOptions).pipe(
-      tap((address) => console.log(`added address`)),
+      tap((address) => alert(`added address`)),
       catchError(this.rest.handleError<any>('addOrEditAddress'))
     );
   }

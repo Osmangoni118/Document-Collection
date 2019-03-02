@@ -2,17 +2,42 @@
   <h2 class="h2-cl">Add Document Type</h2>
 </div>
 <div class="container">
-  <label for="fname">Type Name</label>
+  <label>Type Name</label>
   <input [(ngModel)]="userData.typeName" type="text" placeholder="Type Name">
-  <label for="fname">Description</label>
+  <label>Description</label>
   <input [(ngModel)]="userData.description" type="text" placeholder="Description">
-  <label for="fname">Storage Address</label>
+  <!-- <label for="fname">Storage Address</label>
   <input [(ngModel)]="userData.storageAddress" type="text" placeholder="Storage Address">
   <label for="fname">Multiple Document</label>
   <input type="radio" name="multipleDocument" value="True" [ngModel]="userData.multipleDocument" data-md-icheck
     (change)="toggleVisibility($event, 'True')"> Yes
   <input type="radio" name="multipleDocument" value="False" [ngModel]="userData.multipleDocument" data-md-icheck
-    (change)="toggleVisibility($event, 'False')"> No
+    (change)="toggleVisibility($event, 'False')"> No -->
+
+  <label>Select properties for document type</label>
+  <ul class="li">
+    <li>
+      <input type="checkbox" [(ngModel)]="userData.documentNo" data-md-icheck (change)="changeDocumentNo($event)" />
+      Document No.
+    </li>
+    <li>
+      <input type="checkbox" [(ngModel)]="userData.documentName" data-md-icheck (change)="changeDocumentName($event)" />
+      Document Name
+    </li>
+    <li>
+      <input type="checkbox" [(ngModel)]="userData.verified" data-md-icheck (change)="changeVerified($event)" />
+      Verified
+    </li>
+    <li>
+      <input type="checkbox" [(ngModel)]="userData.documentValidity" data-md-icheck
+        (change)="changeDocumentValidity($event)" /> Document Validity
+    </li>
+    <li>
+      <input type="checkbox" [(ngModel)]="userData.others" data-md-icheck (change)="changeOthers($event)" /> Others
+      Information
+    </li>
+
+  </ul>
 
   <button (click)="addDocumentType()" class="btn">Save</button> <br />
   <button (click)="previousPage()" class="btn-pre">Previous</button>

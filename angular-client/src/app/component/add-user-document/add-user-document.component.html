@@ -4,12 +4,48 @@
 
 <ul class="products">
   <li *ngFor="let t of typeList; let i=index;">
-    <input type="radio" name="id" value="{{t.id}}" data-md-icheck (change)="toggleVisibility($event, t.id)">
+    <input type="radio" name="id" value="{{t.id}}" data-md-icheck (change)="toggleVisibility($event, t)">
     {{t.typeName}}
   </li>
 </ul>
 
-<div *ngIf="propertyList.length > 0;" class="container">
+
+<div class="container">
+  <div *ngIf="typeDto.documentNo == 1;">
+    <label for="fname">{{typeDto.typeName}} No.</label>
+    <input type="text" [(ngModel)]="userData.documentNo" placeholder="{{typeDto.description}} No.">
+  </div>
+  <div *ngIf="typeDto.documentName == 1;">
+    <label for="fname">{{typeDto.typeName}} Name</label>
+    <input type="text" [(ngModel)]="userData.documentName" placeholder="{{typeDto.typeName}} Name">
+  </div>
+  <div *ngIf="typeDto.verified == 1;">
+    <label for="fname">{{typeDto.description}} Verified</label>
+    <!-- <input type="text" [(ngModel)]="userData.verified"> -->
+    <div>
+      <input type="radio" name="verified" value="1" [ngModel]="userData.verified" data-md-icheck
+        (change)="documentVerified($event)"> Yes
+      <input type="radio" name="verified" value="0" [ngModel]="userData.verified" data-md-icheck
+        (change)="documentVerified($event)"> NO
+    </div>
+  </div>
+  <div *ngIf="typeDto.documentValidity == 1;">
+    <label for="fname">{{typeDto.description}} Validity</label>
+    <input type="date" [(ngModel)]="userData.documentValidity" placeholder="{{typeDto.description}}">
+  </div>
+  <div *ngIf="typeDto.others == 1;">
+    <label for="fname">Others Information</label>
+    <input type="text" [(ngModel)]="userData.others" placeholder="{{typeDto.description}}">
+  </div>
+
+  <button *ngIf="typeId != ''" (click)="addUserDocument()" class="btn">Save</button> <br />
+  <button (click)="previousPage()" class="btn-pre">Previous</button>
+</div>
+
+
+
+
+<!-- <div *ngIf="propertyList.length > 0;" class="container">
   <ul class="products">
     <li *ngFor="let p of propertyList;">
       <label for="fname">{{p.propertyLabel}}</label>
@@ -22,7 +58,7 @@
   <ul class="products">
     Property not found
   </ul>
-</div>
+</div> -->
 
 <!-- <p class="check-box">
   <input type="radio" name="documentType" value="NID" [ngModel]="userData.documentType" data-md-icheck

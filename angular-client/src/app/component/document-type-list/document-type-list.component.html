@@ -8,17 +8,15 @@
 <table id="users">
   <tr>
     <th>Type Name</th>
-    <th>Multiple</th>
-    <th>Storage</th>
-    <th class="th-width">Action</th>
+    <th>Description</th>
+    <!-- <th class="th-width">Action</th> -->
   </tr>
   <tr *ngFor="let t of typeList">
     <td>{{t.typeName}}</td>
-    <td>{{t.multipleDocument}}</td>
-    <td>{{t.storageAddress}}</td>
-    <td>
+    <td>{{t.description}}</td>
+    <!-- <td>
       <button (click)="addDocumentProperty(t)" class="td-btn">Add Document Property</button>
       <button (click)="showProperties(t)" class="td-btn">Property List</button>
-    </td>
+    </td> -->
   </tr>
 </table>

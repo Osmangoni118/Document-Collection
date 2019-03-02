@@ -22,13 +22,18 @@ export class DocumenttypeService {
   addDocumentType(documentType): Observable<any> {
     console.log(documentType);
     return this.http.post<any>(endpoint + 'api/document/types', JSON.stringify(documentType), httpOptions).pipe(
-      tap((documentType) => console.log(`added documentType `, documentType)),
+      tap((documentType) => alert(`added documentType`)),
       catchError(this.rest.handleError<any>('addDocumentType'))
     );
   }
 
   getDocumentTypeListByUserId(userId): Observable<any> {
     return this.http.get(endpoint + 'api/document/types?id=' + userId).pipe(
+      map(this.rest.extractData));
+  }
+
+  getDocumentByTypeId(typeId): Observable<any> {
+    return this.http.get(endpoint + 'api/document/documents?typeId=' + typeId).pipe(
       map(this.rest.extractData));
   }
 }

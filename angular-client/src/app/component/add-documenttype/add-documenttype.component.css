@@ -68,3 +68,7 @@ font-size: 20px;
   .h2-cl{
     margin: 15px;
   }
+
+  .li{    
+  list-style-type: none;
+  }

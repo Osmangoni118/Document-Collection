@@ -14,8 +14,11 @@ public class DocumentTypeDTO {
     private Long id;
     private String typeName;
     private String description;
-    private String storageAddress;
-    private boolean multipleDocument;
+    private int documentNo;
+    private int documentName;
+    private int verified;
+    private int documentValidity;
+    private int others;
     private UserBasicDTO basicDTO;
 
     public Long getId() {
@@ -42,27 +45,51 @@ public class DocumentTypeDTO {
         this.description = description;
     }
 
-    public String getStorageAddress() {
-        return storageAddress;
-    }
-
-    public void setStorageAddress(String storageAddress) {
-        this.storageAddress = storageAddress;
-    }
-
-    public boolean isMultipleDocument() {
-        return multipleDocument;
-    }
-
-    public void setMultipleDocument(boolean multipleDocument) {
-        this.multipleDocument = multipleDocument;
-    }
-
     public UserBasicDTO getBasicDTO() {
         return basicDTO;
     }
 
     public void setBasicDTO(UserBasicDTO basicDTO) {
         this.basicDTO = basicDTO;
+    }
+
+    public int getDocumentNo() {
+        return documentNo;
+    }
+
+    public void setDocumentNo(int documentNo) {
+        this.documentNo = documentNo;
+    }
+
+    public int getDocumentName() {
+        return documentName;
+    }
+
+    public void setDocumentName(int documentName) {
+        this.documentName = documentName;
+    }
+
+    public int getVerified() {
+        return verified;
+    }
+
+    public void setVerified(int verified) {
+        this.verified = verified;
+    }
+
+    public int getDocumentValidity() {
+        return documentValidity;
+    }
+
+    public void setDocumentValidity(int documentValidity) {
+        this.documentValidity = documentValidity;
+    }
+
+    public int getOthers() {
+        return others;
+    }
+
+    public void setOthers(int others) {
+        this.others = others;
     }
 }

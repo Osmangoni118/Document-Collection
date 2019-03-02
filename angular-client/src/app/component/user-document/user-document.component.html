@@ -1,0 +1,48 @@
+
+
+<h2 class="h-header">Document List For {{user.firstName}} {{user.lastName}}</h2>
+<div class="padd">
+  <div *ngIf="documentList.length == 0">
+      <h3>Sorry! No document found for {{user.firstName}} {{user.lastName}}</h3> 
+  </div>
+<div *ngFor="let d of documentList;">
+  <div class="input-container">
+    <div class="propt">
+      User Name : {{d.basicDTO.firstName}}
+    </div>
+    <div class="propt">
+      User Email : {{d.basicDTO.email}}
+    </div>
+    <div class="propt">
+      Mobile No. : {{d.basicDTO.mobileNo}}
+    </div>
+    <div class="propt" *ngIf="d.basicDTO.registrationDate != null">
+      Ragistration Date : {{d.basicDTO.registrationDate}}
+    </div>
+    <div class="propt">
+      Document Type : {{d.documentTypeDTO.typeName}}
+    </div>
+    <div class="propt" *ngIf="d.documentTypeDTO.description != ''">
+      Document Description : {{d.documentTypeDTO.description}}
+    </div>
+    <div class="propt" *ngIf="d.documentNo != ''">
+        {{d.documentTypeDTO.typeName}} No. : {{d.documentNo}}
+    </div>
+    <div class="propt" *ngIf="d.documentName != ''">
+        {{d.documentTypeDTO.typeName}} Name : {{d.documentName}}
+    </div>
+    <div class="propt" *ngIf="d.documentValidity != ''">
+        {{d.documentTypeDTO.typeName}} validity : {{d.documentValidity}}
+    </div>
+    <div class="propt">
+        {{d.documentTypeDTO.typeName}} Verified : {{d.verified? 'Yes' : 'NO'}}
+    </div>
+    <div class="propt" *ngIf="d.others != ''">
+        Others Information : {{d.others}}
+    </div>
+  </div>
+</div>
+<div>
+  <button (click)="previousPage()" class="btn-pre">Previous</button>
+</div>
+</div>

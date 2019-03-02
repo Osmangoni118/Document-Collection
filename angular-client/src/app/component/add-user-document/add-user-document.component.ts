@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DocumenttypeService } from '../../service/documenttype.service';
+import { UserdocumentService } from '../../service/userdocument.service';
 import { DocumentpropertyService } from '../../service/documentproperty.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -12,14 +13,15 @@ export class AddUserDocumentComponent implements OnInit {
   typeList: any = [];
   propertyList: any = [];
   userbasic: any = {};
+  typeDto: any = {};
   typeId: any = '';
 
 
   @Input() userData = {
-    id: '', documentValue: ''
+    documentNo: '', documentName: '', verified: 0, documentValidity: '', others: '', basicDTO: {}, documentTypeDTO: {}
   };
 
-  constructor(private rest: DocumenttypeService, private propertyService: DocumentpropertyService,private route: ActivatedRoute, private router: Router) {
+  constructor(private document: UserdocumentService, private rest: DocumenttypeService, private propertyService: DocumentpropertyService, private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe(params => {
       console.log('param = ', params["userbasic"]);
       this.userbasic = params["userbasic"];
@@ -46,29 +48,44 @@ export class AddUserDocumentComponent implements OnInit {
     });
   }
 
-  // addUserDocument() {
-  //   console.log('user basic ', this.userbasic);
-  //   this.userData.userBasicDTO = JSON.parse(this.userbasic);
-  //   console.log("document object : ", this.userData);
-  //   this.rest.addOrEditUserDocument(this.userData).subscribe((result) => {
-  //     this.router.navigate(['/users']);
-  //   }, (err) => {
-  //     console.log(err);
-  //   });
-  // }
+  addUserDocument() {
+    console.log('user basic ', this.userbasic);
+    this.userData.basicDTO = JSON.parse(this.userbasic);
+    console.log('type dto ', this.typeDto);
+    this.userData.documentTypeDTO = this.typeDto;
+    console.log("document object : ", this.userData);
+    this.document.addUserDocument(this.userData).subscribe((result) => {
+      console.log('result ', result);
+      if(result != null){
+        alert('Data added successfully.');
+      this.router.navigate(['/users']);
+      }else{
+        alert('Something wrong.');
+      }
+    }, (err) => {
+      console.log(err);
+    });
+  }
 
   previousPage() {
     this.router.navigate(['/users']);
   }
 
   toggleVisibility(event, value) {
-      console.log('value ', value);
+    console.log('value ', value.id);
     if (event.target.checked) {
-      this.typeId = value;
+      this.typeId = value.id;
       // this.userData.id = value;
-      this.getDocumentPropertyList(value)
-    }    
+      // this.getDocumentPropertyList(value)
+      this.typeDto = value;
+    }
 
+  }
+
+  documentVerified(event){
+    if(event.target.checked){
+      this.userData.verified = 1;
+    }
   }
 
 }

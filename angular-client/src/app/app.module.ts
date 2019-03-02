@@ -18,6 +18,7 @@ import { AddDocumenttypeComponent } from './component/add-documenttype/add-docum
 import { AddDocumentPropertyComponent } from './component/add-document-property/add-document-property.component';
 import { DocumentTypeListComponent } from './component/document-type-list/document-type-list.component';
 import { DocumentPropertyListComponent } from './component/document-property-list/document-property-list.component';
+import { UserDocumentComponent } from './component/user-document/user-document.component';
 
 
 const appRoutes: Routes = [
@@ -54,6 +55,11 @@ const appRoutes: Routes = [
   {
     path: 'document/list-by-user',
     component: DocumentByuserComponent,
+    data: { title: 'Document List By User' }
+  },
+  {
+    path: 'document/by/userid',
+    component: UserDocumentComponent,
     data: { title: 'Document List By User' }
   },
   {
@@ -101,7 +107,8 @@ const appRoutes: Routes = [
     AddDocumenttypeComponent,
     AddDocumentPropertyComponent,
     DocumentTypeListComponent,
-    DocumentPropertyListComponent
+    DocumentPropertyListComponent,
+    UserDocumentComponent
   ],
   imports: [
     BrowserModule,

@@ -5,8 +5,8 @@
  */
 package com.document.collection.controller;
 
-import com.document.collection.dto.DocumentTypeDTO;
-import com.document.collection.service.DocumentTypeService;
+import com.document.collection.dto.DocumentDTO;
+import com.document.collection.service.DocumentService;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,17 +26,17 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "api/document")
-public class DocumentTypeController {
-    
-    private static final Logger LOGGER = LoggerFactory.getLogger(DocumentTypeController.class);
+public class DocumentController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DocumentController.class);
+
     @Autowired
-    private DocumentTypeService documentTypeService;
-    
-    
-    @RequestMapping(value = "/types", method = RequestMethod.POST)
-    public ResponseEntity<DocumentTypeDTO> saveDocumentType(@RequestBody DocumentTypeDTO documentTypeDTO) {
+    private DocumentService documentService;
+
+    @RequestMapping(value = "/documents", method = RequestMethod.POST)
+    public ResponseEntity<DocumentDTO> saveUserDocument(@RequestBody DocumentDTO documentDTO) {
         try {
-            boolean status = documentTypeService.isSaveDocumentType(documentTypeDTO);
+            boolean status = documentService.isSaveDocument(documentDTO);
             if (status) {
                 return new ResponseEntity(HttpStatus.CREATED);
             } else {
@@ -52,10 +52,15 @@ public class DocumentTypeController {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
+
+    @RequestMapping(value = "/document", method = RequestMethod.GET)
+    public DocumentDTO findDocumentByTypeId(@RequestParam Long typeId) throws Exception {
+        return documentService.findDocumentByTypeId(typeId);
+    }
     
-    @RequestMapping(value = "/types", method = RequestMethod.GET)
-    public List<DocumentTypeDTO> findDocumentTypeListById(@RequestParam Long id) throws Exception {
-        return documentTypeService.findDocumentTypeDtoByUserId(id);
+    @RequestMapping(value = "/documents", method = RequestMethod.GET)
+    public List<DocumentDTO> findDocumentListByUserId(@RequestParam Long userId) throws Exception {
+        return documentService.findDocumentListByUser(userId);
     }
 
 }

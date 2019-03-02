@@ -42,6 +42,12 @@ export class UsersComponent implements OnInit {
     };
     this.router.navigate(['/document/type/list-by-userid'], navigationExtras);
   }
+  showUserDocument(user) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: { "userbasic": JSON.stringify(user) }
+    };
+    this.router.navigate(['/document/by/userid'], navigationExtras);
+  }
   addUserDocument(userbasic) {
     let navigationExtras: NavigationExtras = {
       queryParams: { "userbasic": JSON.stringify(userbasic) }

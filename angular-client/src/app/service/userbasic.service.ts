@@ -33,7 +33,7 @@ export class UserbasicService {
   addOrEditUserBasic(userbasic): Observable<any> {
     console.log(userbasic);
     return this.http.post<any>(endpoint + 'users/' + 'add-or-edit', JSON.stringify(userbasic), httpOptions).pipe(
-      tap((userbasic) => console.log(`added userbasic w/ id=${userbasic.userBasicID}`)),
+      tap((userbasic) => alert(`added userbasic`)),
       catchError(this.rest.handleError<any>('addOrEditUserBasic'))
     );
   }
